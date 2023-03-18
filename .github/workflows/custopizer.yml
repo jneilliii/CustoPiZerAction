@@ -3,6 +3,10 @@ name: "CustoPiZe"
 on:
   workflow_dispatch:
     inputs:
+      input_image:
+        description: "The base image to use as input for CustoPiZer"
+        required: true
+        default: https://unofficialpi.org/Distros/OctoPi/octopi-bullseye-armhf-lite-1.0.0.zip
       octoprint_version:
         description: "OctoPrint version (leave empty to use latest stable release)"
         required: false
@@ -22,7 +26,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        curl -L -o octopi.zip https://unofficialpi.org/Distros/OctoPi/octopi-bullseye-armhf-lite-1.0.0.zip
+        curl -L -o octopi.zip ${{ github.event.inputs.input_image }}
         
         unzip octopi.zip
         rm octopi.zip
