@@ -1,0 +1,42 @@
+name: "CustoPiZe"
+
+on:
+  workflow_dispatch:
+    inputs:
+      octoprint_version:
+        description: "OctoPrint version (leave empty to use latest stable release)"
+        required: false
+        default: ''
+
+jobs:
+  build:
+    name: "Build"
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: "⬇ Checkout"
+      uses: actions/checkout@v2
+
+    - name: "⬇ Download OctoPi"
+      id: octopi_download
+      run: |
+        mkdir build
+        cd build
+        curl -L -o octopi.zip ${{ env.OCTOPI_URL }}
+        
+        unzip octopi.zip
+        rm octopi.zip
+        IMAGE=$(ls *.img | head -n 1)
+        mv $IMAGE input.img
+
+    - name: Run CustoPiZer
+      uses: OctoPrint/CustoPiZer@main
+      with:
+        workspace: "${{ github.workspace }}/build"
+        scripts:  "${{ github.workspace }}/scripts"
+        environment: '{ "OCTOPRINT_VERSION": "${{ github.event.inputs.octoprint_version }}" }'
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        path: build/ouput.img
