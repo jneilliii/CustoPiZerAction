@@ -6,7 +6,7 @@ on:
       input_image:
         description: "The base image to use as input for CustoPiZer"
         required: true
-        default: https://unofficialpi.org/Distros/OctoPi/octopi-bullseye-armhf-lite-1.0.0.zip
+        default: "https://unofficialpi.org/Distros/OctoPi/octopi-bullseye-armhf-lite-1.0.0.zip"
       octoprint_version:
         description: "OctoPrint version (leave empty to use latest stable release)"
         required: false
