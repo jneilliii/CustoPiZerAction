@@ -37,6 +37,6 @@ jobs:
         environment: '{ "OCTOPRINT_VERSION": "${{ github.event.inputs.octoprint_version }}" }'
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         path: ${{ github.workspace }}/build/output.img
