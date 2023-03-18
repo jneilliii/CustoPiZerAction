@@ -39,4 +39,4 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        path: ${{ github.workspace }}/build/ouput.img
+        path: ouput.img
