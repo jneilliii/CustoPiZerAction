@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: "⬇ Checkout"
+    - name: "📥 Checkout"
       uses: actions/checkout@v3
 
-    - name: "⬇ Download OctoPi"
+    - name: "📥 Download OctoPi"
       id: octopi_download
       run: |
         mkdir build
@@ -29,7 +29,7 @@ jobs:
         IMAGE=$(ls *.img | head -n 1)
         mv $IMAGE input.img
 
-    - name: "🏗 Run CustoPiZer"
+    - name: "🏭 Run CustoPiZer"
       uses: OctoPrint/CustoPiZer@main
       with:
         workspace: "${{ github.workspace }}/build"
@@ -42,7 +42,7 @@ jobs:
       with:
         image_path: "${{ github.workspace }}/build/output.img"
 
-    - name: "⬆️ Upload Artifact"
+    - name: "📤 Upload Artifact"
       uses: actions/upload-artifact@v3
       with:
         path: ${{ github.workspace }}/build/${{ steps.package-image.outputs.zip_name }}
